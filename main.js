@@ -68,7 +68,25 @@ const postList = document.querySelector('.posts-list');
 
 //Inizio popolando la pagina 
 printAllPosts(postsArray);
-
+//estraggo gli elementi del pulsante like e numero like
+const likeBtns = document.querySelectorAll('.js-like-button');
+const likeCounters = document.querySelectorAll('.js-likes-counter');
+//aggiungo la funzione di click per ogni pulsante like
+for (let i = 0; i < likeBtns.length; i++){
+    const currentLikeBtn = likeBtns[i];
+    let currentLikeCounter = likeCounters[i].innerHTML;
+    let currentLikeCounterAsNumber = parseInt(likeCounters[i].innerHTML);
+    
+    currentLikeBtn.addEventListener('click', function(e){
+        e.preventDefault();
+        //se l'utente non ha ancora messo like evidenzio di verde e aumento il counter
+        if(!this.classList.contains('like-button--liked')){    
+            currentLikeCounterAsNumber++;
+            currentLikeBtn.classList.add('like-button--liked');
+            likeCounters[i].innerHTML = currentLikeCounterAsNumber;
+        }
+    });
+}
 
 
 
@@ -82,7 +100,6 @@ printAllPosts(postsArray);
 function printAllPosts(postsArray){
     for(let i=0; i < postsArray.length; i++){
         const currentPost = postsArray[i]
-        // console.log(printSinglePost(currentPost));
         printSinglePost(currentPost);
     }
 }
