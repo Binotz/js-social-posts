@@ -25,6 +25,7 @@ const postsArray = [
         date: '06-20-2022',
         text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Temporibus accusamus nisi, veniam neque, labore assumenda culpa quas quis ad natus quidem doloremque quae mollitia laudantium aut molestias quibusdam obcaecati animi?',
         postPic: `https://unsplash.it/300/300?image=1`,
+        altImage: `post-picture`,
         likes: 0
     },
     {
@@ -34,6 +35,7 @@ const postsArray = [
         date: '09-10-2022',
         text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Temporibus accusamus nisi, veniam neque, labore assumenda culpa quas quis ad natus quidem doloremque quae mollitia laudantium aut molestias quibusdam obcaecati animi?',
         postPic: null,
+        altImage: null,
         likes: 12
     },
     {
@@ -43,6 +45,7 @@ const postsArray = [
         date: '12-31-1990',
         text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Temporibus accusamus nisi, veniam neque, labore assumenda culpa quas quis ad natus quidem doloremque quae mollitia laudantium aut molestias quibusdam obcaecati animi?',
         postPic: null,
+        altImage: null,
         likes: 100
     },
     {
@@ -52,6 +55,7 @@ const postsArray = [
         date: '01-01-2020',
         text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Temporibus accusamus nisi, veniam neque, labore assumenda culpa quas quis ad natus quidem doloremque quae mollitia laudantium aut molestias quibusdam obcaecati animi?',
         postPic: `https://unsplash.it/300/300?image=4`,
+        altImage: `post-picture`,
         likes: 1255
     },
     {
@@ -61,6 +65,7 @@ const postsArray = [
         date: '06-20-2022',
         text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Temporibus accusamus nisi, veniam neque, labore assumenda culpa quas quis ad natus quidem doloremque quae mollitia laudantium aut molestias quibusdam obcaecati animi?',
         postPic: `https://unsplash.it/300/300?image=5`,
+        altImage: `post-picture`,
         likes: 103
     },
 ];
@@ -87,6 +92,13 @@ for (let i = 0; i < likeBtns.length; i++){
         if(!this.classList.contains('like-button--liked')){    
             currentLikeCounterAsNumber++;
             currentLikeBtn.classList.add('like-button--liked');
+            likeCounters[i].innerHTML = currentLikeCounterAsNumber;
+        } 
+        //BONUS 3:
+        //Al click su un pulsante "Mi Piace" di un post, se abbiamo già cliccato dobbiamo decrementare il contatore e cambiare il colore del bottone.
+        else {
+            currentLikeCounterAsNumber--;
+            currentLikeBtn.classList.remove('like-button--liked');
             likeCounters[i].innerHTML = currentLikeCounterAsNumber;
         }
     });
@@ -124,7 +136,7 @@ function printSinglePost(post){
         </div>
         <div class="post__text">${post.text}</div>
         <div class="post__image">
-            ${(post.postPic ? printPostPic(post.postPic) : '')}
+            ${(post.postPic ? printPostPic(post.postPic, post.altImage) : '')}
         </div>
         <div class="post__footer">
             <div class="likes js-likes">
@@ -148,8 +160,8 @@ function printSinglePost(post){
 
 //Renderizzo il div dell'immagine del post
 //arguments: path dell'immagine
-function printPostPic(imgPath){
-    return `<img src="${imgPath}" alt=""></img>`
+function printPostPic(imgPath, altImage){
+    return `<img src="${imgPath}" alt="${altImage}"></img>`
 }
 
 
